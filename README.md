@@ -1,8 +1,8 @@
 # ZSCRIPTS - Lightweight personal monorepo configuration
 
-Collected functionality that can be added and called in a few keystrokes.
+Your own personal monorepo. Got random helper scripts you like to re-use across projects? Throw them in scripts and call them from anywhere.
 
-Random helpers I want to save off and call. Some examples are provided in scripts, but you should build your own!
+Idea is, I have random helpers I want to save off and call later. Some examples are provided in scripts, but you should build your own!
 
 # SETUP
 
