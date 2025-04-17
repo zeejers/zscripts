@@ -6,7 +6,7 @@ Idea is, I have random helpers I want to save off and call later. Some examples 
 
 # SETUP
 
-Instal deno (https://docs.deno.com/runtime/getting_started/installation):
+Install deno (https://docs.deno.com/runtime/getting_started/installation):
 ```bash
 curl -fsSL https://deno.land/install.sh | sh
 ```
