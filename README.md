@@ -1,8 +1,8 @@
-# MY PERSONAL MONOREPO
+# ZSCRIPTS - Lightweight personal monorepo configuration
 
 Collected functionality that can be added and called in a few keystrokes.
 
-Random helpers I want to save off and call.
+Random helpers I want to save off and call. Some examples are provided in scripts, but you should build your own!
 
 # SETUP
 
