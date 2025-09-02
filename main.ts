@@ -6,7 +6,11 @@ let params: string[] = [];
 if (Deno.args.length > 0) {
   params = Deno.args.slice(1);
 }
-async function runCmd(entryPoint: string, params: string[]) {
+async function runCmd(_entryPoint: string, params: string[]) {
+  const entryPoint = _entryPoint || "list";
+  console.log(
+    ">> HELP: No entrypoint script was provided. These are the scripts that are available. <<\n"
+  );
   try {
     const entryPointPath = path.join(
       import.meta.dirname || "./",
