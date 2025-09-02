@@ -14,6 +14,7 @@ export const cli = defineCliSimple({
   positionals: {
     input: str(),
     output: str().optional(),
+    token: str(),
   },
   flags: {
     rate: num().default(8000),
@@ -46,7 +47,6 @@ export function run(args: Args) {
   const generatedOutputFileNoExt = generatedOutputFile.replace(`${ext}`, "");
   const generateOutputFileName = `${generatedOutputFileNoExt}-converted${ext}`;
   const outputFile = args.output || generateOutputFileName;
-
   const overwriteFlag = args.overwrite ? "-y" : "";
   const cmd = `ffmpeg ${overwriteFlag} -i "${inputFile}" -c:a ${args.codec} -ar ${args.rate} "${outputFile}"`;
 

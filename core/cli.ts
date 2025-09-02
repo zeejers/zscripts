@@ -221,10 +221,11 @@ export function defineCli<
   return { meta, schema, parse, helpText } as const;
 }
 
-export type InferCli<T extends ReturnType<typeof defineCli>> = z.infer<
-  T["schema"]
->;
-
+export type InferCli<T> = T extends { schema: infer S }
+  ? S extends z.ZodType<any, any, any>
+    ? z.infer<S>
+    : never
+  : never;
 export type ScriptModule<TArgs = unknown> = {
   run: (args: TArgs) => unknown | Promise<unknown>;
   cli?: ReturnType<typeof defineCli>;
@@ -246,8 +247,8 @@ type ShapeFromDefs<
 > = Merge<FlagsToShape<TFlags>, Merge<FromPosObj<TPos>, ExtraShape>>;
 
 export function defineCliSimple<
-  TFlags extends Record<string, AnyZod> | undefined,
-  TPos extends Record<string, AnyZod> | undefined
+  TFlags extends { [K in keyof TFlags]: AnyZod } | undefined,
+  TPos extends { [K in keyof TPos]: AnyZod } | undefined
 >(def: {
   description?: string;
   hint?: string;
@@ -283,11 +284,12 @@ export function defineCliSimple<
   });
 
   // Re-type the returned object so schema/parse reflect the object-shaped positionals.
-  type S = z.ZodObject<ShapeFromDefs<TFlags, TPos>>;
   return base as unknown as {
     meta: typeof base.meta;
-    schema: S;
-    parse: (argv: string[]) => z.infer<S>;
+    schema: z.ZodObject<ShapeFromDefs<TFlags, TPos>>;
+    parse: (
+      argv: string[]
+    ) => z.infer<z.ZodObject<ShapeFromDefs<TFlags, TPos>>>;
     helpText: typeof base.helpText;
   };
 }
