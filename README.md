@@ -11,9 +11,14 @@ Install deno (https://docs.deno.com/runtime/getting_started/installation):
 curl -fsSL https://deno.land/install.sh | sh
 ```
 
-Add this alias to your .zshrc
+Run this command from the repo root to register `zscripts` command globally
 ```bash
 deno run install
+```
+
+Now, test by listing zscripts:
+```bash
+zscripts list
 ```
 
 # SCRIPTS
