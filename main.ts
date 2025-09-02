@@ -10,14 +10,14 @@ let params: string[] = [];
 if (Deno.args.length > 0) params = Deno.args.slice(1);
 
 function isCoreScript(name: string) {
-  return name === "list" || name === "gen" || name === "example";
+  // Core scripts live in core/scripts/
+  return name === "gen" || name === "list" || name === "example";
 }
 function resolveScriptPath(name: string) {
-  const corePath = isCoreScript(name) ? "core/" : "";
-  return path.join(
-    import.meta.dirname || "./",
-    `scripts/${corePath}${name}.ts`
-  );
+  if (isCoreScript(name)) {
+    return path.join(import.meta.dirname || "./", `core/scripts/${name}.ts`);
+  }
+  return path.join(import.meta.dirname || "./", `scripts/${name}.ts`);
 }
 
 function printGeneralHelp() {

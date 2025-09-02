@@ -1,4 +1,4 @@
-import { defineCliSimple, str, num, type InferCli, bool } from "../core/cli.ts";
+import { defineCliSimple, str, num, type InferCli, bool } from "../cli.ts";
 
 export const cli = defineCliSimple({
   description: "Describe what your script does",
@@ -26,3 +26,4 @@ export async function run(args: Args) {
   }
   console.log({ input: args.input, count: args.count });
 }
+

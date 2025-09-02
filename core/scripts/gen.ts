@@ -1,5 +1,5 @@
 import * as path from "jsr:@std/path";
-import { defineCliSimple, str, bool, type InferCli } from "../../core/cli.ts";
+import { defineCliSimple, str, bool, type InferCli } from "../cli.ts";
 
 export const cli = defineCliSimple({
   description: "Generate a new zscripts script file inside the monorepo's scripts/ directory.",
@@ -96,11 +96,10 @@ export async function run(args: Args) {
 `;
 }
 
-
 export async function run(args: Args) {
   // Resolve repo root relative to this file location (not CWD)
   const thisFile = path.fromFileUrl(import.meta.url);
-  const thisDir = path.dirname(thisFile); // .../scripts/core
+  const thisDir = path.dirname(thisFile); // .../core/scripts
   const repoRoot = path.resolve(thisDir, "../../");
   const scriptsDir = path.join(repoRoot, "scripts");
 
@@ -129,8 +128,8 @@ export async function run(args: Args) {
   try {
     await writeFileSafe(targetPath, content, args.force);
     console.log(`Created ${targetPath}`);
-
   } catch (e) {
     console.error(e?.message ?? e);
   }
 }
+
